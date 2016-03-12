@@ -1,4 +1,4 @@
-package com.dy.manger.Bean;
+package com.dy.manager.Bean;
 
 import java.util.List;
 

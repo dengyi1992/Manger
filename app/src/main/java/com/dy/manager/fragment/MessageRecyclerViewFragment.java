@@ -1,4 +1,4 @@
-package com.dy.manger.fragment;
+package com.dy.manager.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,9 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.dy.manger.Adpter.MessageRecyclerViewAdapter;
-import com.dy.manger.R;
-import com.dy.manger.Adpter.TestRecyclerViewAdapter;
+import com.dy.manager.Adpter.MessageRecyclerViewAdapter;
+import com.dy.manager.R;
 import com.github.florent37.materialviewpager.MaterialViewPagerHelper;
 import com.github.florent37.materialviewpager.adapter.RecyclerViewMaterialAdapter;
 

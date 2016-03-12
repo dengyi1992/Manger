@@ -1,14 +1,13 @@
-package com.dy.manger.Adpter;
+package com.dy.manager.Adpter;
 
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.dy.manger.Bean.DataBaseInfo;
-import com.dy.manger.R;
+import com.dy.manager.Bean.DataBaseInfo;
+import com.dy.manager.R;
 
 import java.util.List;
 

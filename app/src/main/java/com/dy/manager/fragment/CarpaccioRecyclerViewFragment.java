@@ -1,15 +1,14 @@
-package com.dy.manger.fragment;
+package com.dy.manager.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.dy.manger.R;
+import com.dy.manager.R;
 import com.github.florent37.carpaccio.Carpaccio;
 import com.github.florent37.carpaccio.controllers.adapter.Holder;
 import com.github.florent37.carpaccio.controllers.adapter.OnItemClickListener;

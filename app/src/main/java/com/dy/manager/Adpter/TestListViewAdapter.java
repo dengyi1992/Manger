@@ -1,4 +1,4 @@
-package com.dy.manger.Adpter;
+package com.dy.manager.Adpter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -6,7 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 
-import com.dy.manger.R;
+import com.dy.manager.R;
 
 import java.util.List;
 

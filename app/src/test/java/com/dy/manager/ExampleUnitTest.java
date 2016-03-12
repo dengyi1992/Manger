@@ -1,4 +1,4 @@
-package com.dy.manger;
+package com.dy.manager;
 
 import org.junit.Test;
 

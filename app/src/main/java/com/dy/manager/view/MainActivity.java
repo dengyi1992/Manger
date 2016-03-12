@@ -1,4 +1,4 @@
-package com.dy.manger.view;
+package com.dy.manager.view;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -12,15 +12,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
-import com.dy.manger.R;
-import com.dy.manger.fragment.CarpaccioRecyclerViewFragment;
-import com.dy.manger.fragment.DataBaseRecyclerViewFragment;
-import com.dy.manger.fragment.DatabaseFragment;
-import com.dy.manger.fragment.MessageRecyclerViewFragment;
-import com.dy.manger.fragment.RecyclerViewFragment;
-import com.dy.manger.fragment.ScrollFragment;
-import com.dy.manger.fragment.TaskRecyclerViewFragment;
-import com.dy.manger.fragment.WebViewFragment;
+import com.dy.manager.R;
+import com.dy.manager.fragment.DataBaseRecyclerViewFragment;
+import com.dy.manager.fragment.MessageRecyclerViewFragment;
+import com.dy.manager.fragment.RecyclerViewFragment;
+import com.dy.manager.fragment.ScrollFragment;
+import com.dy.manager.fragment.TaskRecyclerViewFragment;
 import com.github.florent37.materialviewpager.MaterialViewPager;
 import com.github.florent37.materialviewpager.header.HeaderDesign;
 

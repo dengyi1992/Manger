@@ -1,4 +1,4 @@
-package com.dy.manger.fragment;
+package com.dy.manager.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,11 +9,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.dy.manger.R;
-import com.dy.manger.Adpter.TestRecyclerViewAdapter;
+import com.dy.manager.Adpter.TaskRecyclerViewAdapter;
+import com.dy.manager.R;
 import com.github.florent37.materialviewpager.MaterialViewPagerHelper;
 import com.github.florent37.materialviewpager.adapter.RecyclerViewMaterialAdapter;
-
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +20,7 @@ import java.util.List;
 /**
  * Created by florentchampigny on 24/04/15.
  */
-public class RecyclerViewFragment extends Fragment {
+public class TaskRecyclerViewFragment extends Fragment {
 
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
@@ -30,8 +29,8 @@ public class RecyclerViewFragment extends Fragment {
 
     private List<Object> mContentItems = new ArrayList<>();
 
-    public static RecyclerViewFragment newInstance() {
-        return new RecyclerViewFragment();
+    public static TaskRecyclerViewFragment newInstance() {
+        return new TaskRecyclerViewFragment();
     }
 
     @Override
@@ -47,7 +46,7 @@ public class RecyclerViewFragment extends Fragment {
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.setHasFixedSize(true);
 
-        mAdapter = new RecyclerViewMaterialAdapter(new TestRecyclerViewAdapter(mContentItems));
+        mAdapter = new RecyclerViewMaterialAdapter(new TaskRecyclerViewAdapter(mContentItems));
         mRecyclerView.setAdapter(mAdapter);
 
         {

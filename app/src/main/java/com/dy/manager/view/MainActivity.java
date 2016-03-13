@@ -1,5 +1,6 @@
 package com.dy.manager.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -13,6 +14,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.dy.manager.R;
+import com.dy.manager.Services.MessageService;
 import com.dy.manager.fragment.DataBaseRecyclerViewFragment;
 import com.dy.manager.fragment.MessageRecyclerViewFragment;
 import com.dy.manager.fragment.RecyclerViewFragment;
@@ -35,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        startService(new Intent(this, MessageService.class));
 
 
         setTitle("");

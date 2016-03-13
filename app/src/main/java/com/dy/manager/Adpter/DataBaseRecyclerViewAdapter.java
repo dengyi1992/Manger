@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.dy.manager.Bean.DataBaseInfo;
 import com.dy.manager.R;
@@ -63,6 +64,12 @@ public class DataBaseRecyclerViewAdapter extends RecyclerView.Adapter<DataBaseRe
             tableAvgLengthTextView = (TextView) itemView.findViewById(R.id.tv_table_avg_length);
             tableDataLengthTextView = (TextView) itemView.findViewById(R.id.tv_table_data_length);
             tableAutoIncrementTextView = (TextView) itemView.findViewById(R.id.tv_table_auto_increment);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Toast.makeText(view.getContext(),contents.get(getAdapterPosition()-1).getTABLE_NAME(),Toast.LENGTH_SHORT).show();
+                }
+            });
         }
     }
 }

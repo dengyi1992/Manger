@@ -64,7 +64,8 @@ public class MessageService extends Service {
             try {
                 String iname = jsonObject.getString("iname");
                 String time = jsonObject.getString("time");
-                System.out.println("##################更新完的接口"+iname+"##更新完成时间##"+time);
+                onHandleIntent(iname,time);
+//                System.out.println("##更新完的接口##"+iname+"##更新完成时间##"+time);
                 //任务完成，将所发任务的消息加入数据列表，并显示，可以加通知栏显示
                 //更新消息列表有难度，并加入已读与否的标记
             } catch (JSONException e) {
@@ -80,4 +81,18 @@ public class MessageService extends Service {
         mSocket.disconnect();
         mSocket.off("new message", onNewMessage);
     }
+    protected void onHandleIntent(String iname, String time) {
+
+        Intent intent = new Intent();
+
+        intent.setAction("com.deng.message");
+
+        intent.putExtra("name", iname);
+        intent.putExtra("time",time);
+
+
+        getBaseContext().sendBroadcast(intent);
+
+    }
+
 }

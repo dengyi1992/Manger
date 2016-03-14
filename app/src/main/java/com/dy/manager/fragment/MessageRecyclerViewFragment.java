@@ -1,5 +1,9 @@
 package com.dy.manager.fragment;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -24,7 +28,40 @@ public class MessageRecyclerViewFragment extends Fragment {
 
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
+    private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
 
+        @Override
+
+        public void onReceive(Context context, Intent intent){
+//            String name = intent.getStringExtra("name");
+//            String time = intent.getStringExtra("time");
+            System.out.println("name and time in fragment");
+        }
+
+    };
+
+    @Override
+
+    public void onStart() {
+
+        super.onStart();
+
+        IntentFilter intentFilter = new IntentFilter();
+
+        intentFilter.addAction("com.deng.message");
+
+        getActivity().getBaseContext().registerReceiver(mReceiver , intentFilter);
+
+    }
+    @Override
+
+    public void onStop() {
+
+        getActivity().getBaseContext().unregisterReceiver(mReceiver );
+
+        super.onStop();
+
+    }
     private static final int ITEM_COUNT = 100;
 
     private List<Object> mContentItems = new ArrayList<>();

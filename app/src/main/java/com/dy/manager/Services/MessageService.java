@@ -1,11 +1,15 @@
 package com.dy.manager.Services;
 
 import android.app.Service;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
+import android.support.v4.content.LocalBroadcastManager;
 import android.widget.Toast;
 
+import com.dy.manager.fragment.MessageRecyclerViewFragment;
 import com.github.nkzawa.emitter.Emitter;
 import com.github.nkzawa.socketio.client.IO;
 import com.github.nkzawa.socketio.client.Socket;
@@ -20,9 +24,12 @@ import java.net.URISyntaxException;
  */
 public class MessageService extends Service {
     private Socket mSocket;
+    private LocalBroadcastManager broadcaster;
+
+
     {
         try {
-            mSocket = IO.socket("http://10.170.66.1:2999/");
+            mSocket = IO.socket("http://192.168.199.127:2999/");
         } catch (URISyntaxException e) {}
     }
     @Nullable
@@ -33,6 +40,7 @@ public class MessageService extends Service {
 
     @Override
     public void onCreate() {
+        broadcaster = LocalBroadcastManager.getInstance(this);
         super.onCreate();
         mSocket.on("dengyi", onNewMessage);
         mSocket.on("taskfinish", onTaskFinish);
@@ -62,9 +70,14 @@ public class MessageService extends Service {
         public void call(Object... args) {
             JSONObject jsonObject = (JSONObject) args[0];
             try {
-                String iname = jsonObject.getString("iname");
+                String name = jsonObject.getString("iname");
                 String time = jsonObject.getString("time");
-                onHandleIntent(iname,time);
+                System.out.println("++++++++++++++++"+name+time+"++++++++++++++++++++");
+                Intent intent = new Intent();
+                intent.setAction(MessageRecyclerViewFragment.ACTION_UPDATEUI);
+                intent.putExtra("name",name);
+                intent.putExtra("time",time);
+                sendBroadcast(intent);
 //                System.out.println("##更新完的接口##"+iname+"##更新完成时间##"+time);
                 //任务完成，将所发任务的消息加入数据列表，并显示，可以加通知栏显示
                 //更新消息列表有难度，并加入已读与否的标记
@@ -81,18 +94,6 @@ public class MessageService extends Service {
         mSocket.disconnect();
         mSocket.off("new message", onNewMessage);
     }
-    protected void onHandleIntent(String iname, String time) {
 
-        Intent intent = new Intent();
-
-        intent.setAction("com.deng.message");
-
-        intent.putExtra("name", iname);
-        intent.putExtra("time",time);
-
-
-        getBaseContext().sendBroadcast(intent);
-
-    }
 
 }

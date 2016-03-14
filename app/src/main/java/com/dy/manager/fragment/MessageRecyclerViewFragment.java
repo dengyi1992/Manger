@@ -25,20 +25,11 @@ import java.util.List;
  * Created by florentchampigny on 24/04/15.
  */
 public class MessageRecyclerViewFragment extends Fragment {
-
+    public static final String ACTION_UPDATEUI = "action.updateMessage";
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
-    private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
+    private UpdateUIBroadcastReceiver broadcastReceiver;
 
-        @Override
-
-        public void onReceive(Context context, Intent intent){
-//            String name = intent.getStringExtra("name");
-//            String time = intent.getStringExtra("time");
-            System.out.println("name and time in fragment");
-        }
-
-    };
 
     @Override
 
@@ -46,23 +37,19 @@ public class MessageRecyclerViewFragment extends Fragment {
 
         super.onStart();
 
-        IntentFilter intentFilter = new IntentFilter();
 
-        intentFilter.addAction("com.deng.message");
-
-        getActivity().getBaseContext().registerReceiver(mReceiver , intentFilter);
 
     }
     @Override
 
     public void onStop() {
 
-        getActivity().getBaseContext().unregisterReceiver(mReceiver );
+
 
         super.onStop();
 
     }
-    private static final int ITEM_COUNT = 100;
+    private static final int ITEM_COUNT = 0;
 
     private List<Object> mContentItems = new ArrayList<>();
 
@@ -72,6 +59,11 @@ public class MessageRecyclerViewFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        // 动态注册广播
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(ACTION_UPDATEUI);
+        broadcastReceiver = new UpdateUIBroadcastReceiver();
+        getContext().registerReceiver(broadcastReceiver, filter);
         return inflater.inflate(R.layout.fragment_recyclerview, container, false);
     }
 
@@ -93,5 +85,20 @@ public class MessageRecyclerViewFragment extends Fragment {
         }
 
         MaterialViewPagerHelper.registerRecyclerView(getActivity(), mRecyclerView, null);
+    }
+
+
+    private class UpdateUIBroadcastReceiver extends BroadcastReceiver{
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String name = intent.getStringExtra("name");
+            System.out.println("fragment copy"+name);
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        getContext().unregisterReceiver(broadcastReceiver);
     }
 }

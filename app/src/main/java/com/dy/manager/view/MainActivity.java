@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
                     case 3:
                         return ScrollFragment.newInstance();
                     default:
-                            return RecyclerViewFragment.newInstance();
+                        return RecyclerViewFragment.newInstance();
                 }
             }
 

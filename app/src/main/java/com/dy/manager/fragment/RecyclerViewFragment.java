@@ -1,5 +1,9 @@
 package com.dy.manager.fragment;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -22,7 +26,6 @@ import java.util.List;
  * Created by florentchampigny on 24/04/15.
  */
 public class RecyclerViewFragment extends Fragment {
-
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
 
@@ -36,6 +39,7 @@ public class RecyclerViewFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
         return inflater.inflate(R.layout.fragment_recyclerview, container, false);
     }
 

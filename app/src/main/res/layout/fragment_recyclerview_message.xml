@@ -27,6 +27,7 @@
 
         <com.github.clans.fab.FloatingActionButton
             android:id="@+id/fab1"
+            app:fab_colorNormal="@color/blue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@android:drawable/ic_menu_edit"
@@ -35,6 +36,7 @@
 
         <com.github.clans.fab.FloatingActionButton
             android:id="@+id/fab2"
+            app:fab_colorNormal="@color/blue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@android:drawable/ic_menu_edit"
@@ -43,6 +45,7 @@
 
         <com.github.clans.fab.FloatingActionButton
             android:id="@+id/fab3"
+            app:fab_colorNormal="@color/blue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@android:drawable/ic_menu_edit"

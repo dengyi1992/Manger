@@ -43,11 +43,13 @@ public class DataBaseRecyclerViewFragment extends Fragment {
                 case 0:
 
                     //修改适配器
-                    System.out.println(jb);
-                    Gson gson = new Gson();
-                    DataBaseInfo dataBaseInfo = gson.fromJson(jb, DataBaseInfo.class);
-                    mAdapter = new RecyclerViewMaterialAdapter(new DataBaseRecyclerViewAdapter(dataBaseInfo.getContent()));
-                    mRecyclerView.setAdapter(mAdapter);
+                    if (jb!=null){
+                        Gson gson = new Gson();
+                        DataBaseInfo dataBaseInfo = gson.fromJson(jb, DataBaseInfo.class);
+                        mAdapter = new RecyclerViewMaterialAdapter(new DataBaseRecyclerViewAdapter(dataBaseInfo.getContent()));
+                        mRecyclerView.setAdapter(mAdapter);
+                    }
+
                     break;
 
                 default:
@@ -55,7 +57,7 @@ public class DataBaseRecyclerViewFragment extends Fragment {
             }
         }
     };
-    private String jb;
+    private String jb=null;
 
     private List<DataBaseInfo.ContentEntity> mContentItems = new ArrayList<>();
     private String result;
@@ -77,7 +79,7 @@ public class DataBaseRecyclerViewFragment extends Fragment {
                 }
             }
         }.start();
-        View view = inflater.inflate(R.layout.fragment_recyclerview, container, false);
+        View view = inflater.inflate(R.layout.fragment_recyclerview_database, container, false);
         return view ;
     }
 

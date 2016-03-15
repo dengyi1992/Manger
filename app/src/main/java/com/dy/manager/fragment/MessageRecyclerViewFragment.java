@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.dy.manager.Adpter.MessageRecyclerViewAdapter;
+import com.dy.manager.Bean.Message;
 import com.dy.manager.R;
 import com.github.florent37.materialviewpager.MaterialViewPagerHelper;
 import com.github.florent37.materialviewpager.adapter.RecyclerViewMaterialAdapter;
@@ -51,7 +52,7 @@ public class MessageRecyclerViewFragment extends Fragment {
     }
     private static final int ITEM_COUNT = 0;
 
-    private List<Object> mContentItems = new ArrayList<>();
+    private List<Message> mContentItems = new ArrayList<>();
 
     public static MessageRecyclerViewFragment newInstance() {
         return new MessageRecyclerViewFragment();
@@ -64,7 +65,7 @@ public class MessageRecyclerViewFragment extends Fragment {
         filter.addAction(ACTION_UPDATEUI);
         broadcastReceiver = new UpdateUIBroadcastReceiver();
         getContext().registerReceiver(broadcastReceiver, filter);
-        return inflater.inflate(R.layout.fragment_recyclerview, container, false);
+        return inflater.inflate(R.layout.fragment_recyclerview_message, container, false);
     }
 
     @Override
@@ -80,7 +81,7 @@ public class MessageRecyclerViewFragment extends Fragment {
 
         {
             for (int i = 0; i < ITEM_COUNT; ++i)
-                mContentItems.add(new Object());
+                mContentItems.add(new Message());
             mAdapter.notifyDataSetChanged();
         }
 
@@ -92,6 +93,14 @@ public class MessageRecyclerViewFragment extends Fragment {
         @Override
         public void onReceive(Context context, Intent intent) {
             String name = intent.getStringExtra("name");
+            String time = intent.getStringExtra("time");
+            Message message = new Message();
+            message.setMessageTitle(name);
+            message.setMessageBody("更新成功");
+            message.setMessageCount(1);
+            message.setTime(time);
+            mContentItems.add(message);
+            mAdapter.notifyDataSetChanged();
             System.out.println("fragment copy"+name);
         }
     }

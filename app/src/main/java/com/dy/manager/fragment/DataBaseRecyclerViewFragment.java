@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.dy.manager.Adpter.DataBaseRecyclerViewAdapter;
 import com.dy.manager.Bean.DataBaseInfo;
@@ -43,11 +44,13 @@ public class DataBaseRecyclerViewFragment extends Fragment {
                 case 0:
 
                     //修改适配器
-                    System.out.println(jb);
-                    Gson gson = new Gson();
-                    DataBaseInfo dataBaseInfo = gson.fromJson(jb, DataBaseInfo.class);
-                    mAdapter = new RecyclerViewMaterialAdapter(new DataBaseRecyclerViewAdapter(dataBaseInfo.getContent()));
-                    mRecyclerView.setAdapter(mAdapter);
+                    if (jb!=null){
+                        Gson gson = new Gson();
+                        DataBaseInfo dataBaseInfo = gson.fromJson(jb, DataBaseInfo.class);
+                        mAdapter = new RecyclerViewMaterialAdapter(new DataBaseRecyclerViewAdapter(dataBaseInfo.getContent()));
+                        mRecyclerView.setAdapter(mAdapter);
+                    }
+
                     break;
 
                 default:
@@ -55,7 +58,7 @@ public class DataBaseRecyclerViewFragment extends Fragment {
             }
         }
     };
-    private String jb;
+    private String jb=null;
 
     private List<DataBaseInfo.ContentEntity> mContentItems = new ArrayList<>();
     private String result;
@@ -124,6 +127,8 @@ public class DataBaseRecyclerViewFragment extends Fragment {
 
 
 
+            }else {
+                Toast.makeText(getContext(),"网络错误",Toast.LENGTH_SHORT).show();
             }
         } catch (MalformedURLException e) {
             e.printStackTrace();

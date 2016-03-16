@@ -1,10 +1,13 @@
 package com.dy.manager.Adpter;
 
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
+import com.dy.manager.Bean.Message;
 import com.dy.manager.R;
 
 import java.util.List;
@@ -12,26 +15,17 @@ import java.util.List;
 /**
  * Created by florentchampigny on 24/04/15.
  */
-public class MessageRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class MessageRecyclerViewAdapter extends RecyclerView.Adapter<MessageRecyclerViewAdapter.MessageViewHolder> {
 
-    List<Object> contents;
+    List<Message> contents;
 
-    static final int TYPE_HEADER = 0;
-    static final int TYPE_CELL = 1;
 
-    public MessageRecyclerViewAdapter(List<Object> contents) {
+
+    public MessageRecyclerViewAdapter(List<Message> contents) {
         this.contents = contents;
     }
 
-    @Override
-    public int getItemViewType(int position) {
-        switch (position) {
-            case 0:
-                return TYPE_HEADER;
-            default:
-                return TYPE_CELL;
-        }
-    }
+
 
     @Override
     public int getItemCount() {
@@ -39,34 +33,38 @@ public class MessageRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
     }
 
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public MessageViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = null;
 
-        switch (viewType) {
-            case TYPE_HEADER: {
-                view = LayoutInflater.from(parent.getContext())
-                        .inflate(R.layout.list_item_card_big, parent, false);
-                return new RecyclerView.ViewHolder(view) {
-                };
-            }
-            case TYPE_CELL: {
-                view = LayoutInflater.from(parent.getContext())
-                        .inflate(R.layout.list_item_card_small, parent, false);
-                return new RecyclerView.ViewHolder(view) {
-                };
-            }
-        }
-        return null;
+        view = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.list_item_card_big_message, parent, false);
+
+        return new MessageViewHolder(view);
     }
 
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        switch (getItemViewType(position)) {
-            case TYPE_HEADER:
-                break;
-            case TYPE_CELL:
-                break;
+    public void onBindViewHolder(MessageViewHolder holder, int position) {
+
+        Message message = contents.get(position);
+        holder.titleTextView.setText(message.getMessageTitle());
+        holder.contentTextView.setText(message.getMessageBody());
+        holder.countTextView.setText("更新"+message.getMessageCount()+"条");
+        holder.timeTextView.setText("更新时间："+message.getTime());
+
+    }
+
+    public class MessageViewHolder extends RecyclerView.ViewHolder {
+        private TextView titleTextView;
+        private TextView contentTextView;
+        private TextView timeTextView;
+        private TextView countTextView;
+        public MessageViewHolder(View view) {
+            super(view);
+            titleTextView = (TextView) view.findViewById(R.id.tv_title);
+            contentTextView = (TextView) view.findViewById(R.id.tv_content);
+            countTextView = (TextView) view.findViewById(R.id.tv_count);
+            timeTextView = (TextView) view.findViewById(R.id.tv_time);
         }
     }
 }

@@ -80,7 +80,7 @@ public class DataBaseRecyclerViewFragment extends Fragment {
                 }
             }
         }.start();
-        View view = inflater.inflate(R.layout.fragment_recyclerview, container, false);
+        View view = inflater.inflate(R.layout.fragment_recyclerview_database, container, false);
         return view ;
     }
 

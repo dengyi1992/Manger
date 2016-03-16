@@ -19,6 +19,7 @@
         android:paddingRight="10dp"
         android:paddingBottom="10dp"
         android:paddingLeft="10dp"
+        app:menu_colorNormal="@color/blue"
         app:menu_labels_ellipsize="end"
         app:menu_labels_singleLine="true"
         app:menu_backgroundColor="#ccffffff"
@@ -26,6 +27,7 @@
 
         <com.github.clans.fab.FloatingActionButton
             android:id="@+id/fab1"
+            app:fab_colorNormal="@color/blue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@android:drawable/ic_menu_edit"
@@ -34,6 +36,7 @@
 
         <com.github.clans.fab.FloatingActionButton
             android:id="@+id/fab2"
+            app:fab_colorNormal="@color/blue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@android:drawable/ic_menu_edit"
@@ -42,6 +45,7 @@
 
         <com.github.clans.fab.FloatingActionButton
             android:id="@+id/fab3"
+            app:fab_colorNormal="@color/blue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@android:drawable/ic_menu_edit"

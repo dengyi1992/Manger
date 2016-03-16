@@ -29,7 +29,7 @@ public class MessageService extends Service {
 
     {
         try {
-            mSocket = IO.socket("http://192.168.199.127:2999/");
+            mSocket = IO.socket("http://120.27.41.245:2999/");
         } catch (URISyntaxException e) {}
     }
     @Nullable

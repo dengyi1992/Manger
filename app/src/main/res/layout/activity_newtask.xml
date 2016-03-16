@@ -12,7 +12,8 @@
         <NumberPicker
             android:id="@+id/hour_pv"
             android:layout_width="80dp"
-            android:layout_height="160dp" />
+            android:layout_height="160dp"
+            android:background="@android:color/holo_blue_bright" />
 
         <TextView
             android:id="@+id/hour_tv"
@@ -23,12 +24,14 @@
             android:text="时"
             android:textColor="#ffaa33"
             android:textSize="26sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            style="@style/AppTheme" />
         <NumberPicker
             android:id="@+id/minute_pv"
             android:layout_toRightOf="@id/hour_tv"
             android:layout_width="80dp"
-            android:layout_height="160dp" />
+            android:layout_height="160dp"
+            android:background="@android:color/holo_blue_bright" />
 
         <TextView
             android:id="@+id/minute_tv"
@@ -46,7 +49,8 @@
             android:id="@+id/second_pv"
             android:layout_width="80dp"
             android:layout_height="160dp"
-            android:layout_toRightOf="@id/minute_tv" />
+            android:layout_toRightOf="@id/minute_tv"
+            android:background="@android:color/holo_blue_bright" />
 
         <TextView
             android:id="@+id/second_tv"

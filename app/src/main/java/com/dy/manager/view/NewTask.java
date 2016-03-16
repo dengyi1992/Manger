@@ -13,7 +13,7 @@ import com.dy.manager.R;
 /**
  * Created by deng on 16-3-15.
  */
-public class NewTask extends Activity implements NumberPicker.OnValueChangeListener,NumberPicker.OnScrollListener,NumberPicker.Formatter {
+public class NewTask extends Activity {
     private NumberPicker mHourPvNumberPicker;
     private TextView mHourTvTextView;
     private NumberPicker mMinutePvNumberPicker;
@@ -37,44 +37,31 @@ public class NewTask extends Activity implements NumberPicker.OnValueChangeListe
         mIntefaceurlEditText = (EditText) findViewById(R.id.intefaceurl);
         mIntefacetagEditText = (EditText) findViewById(R.id.intefacetag);
         mTypeButton = (Button) findViewById(R.id.bt_type);
-
+        init();
 
     }
     private void init() {
-        mHourPvNumberPicker.setFormatter(this);
-        mHourPvNumberPicker.setOnValueChangedListener(this);
-        mHourPvNumberPicker.setOnScrollListener(this);
+//        mHourPvNumberPicker.setFormatter(this);
+//        mHourPvNumberPicker.setOnValueChangedListener(this);
+//        mHourPvNumberPicker.setOnScrollListener(this);
         mHourPvNumberPicker.setMaxValue(24);
         mHourPvNumberPicker.setMinValue(0);
         mHourPvNumberPicker.setValue(9);
 
-        mMinutePvNumberPicker.setFormatter(this);
-        mMinutePvNumberPicker.setOnValueChangedListener(this);
-        mMinutePvNumberPicker.setOnScrollListener(this);
+//        mMinutePvNumberPicker.setFormatter(this);
+//        mMinutePvNumberPicker.setOnValueChangedListener(this);
+//        mMinutePvNumberPicker.setOnScrollListener(this);
         mMinutePvNumberPicker.setMaxValue(60);
         mMinutePvNumberPicker.setMinValue(0);
         mMinutePvNumberPicker.setValue(49);
 
-        mSecondPvNumberPicker.setFormatter(this);
-        mSecondPvNumberPicker.setOnValueChangedListener(this);
-        mSecondPvNumberPicker.setOnScrollListener(this);
+//        mSecondPvNumberPicker.setFormatter(this);
+//        mSecondPvNumberPicker.setOnValueChangedListener(this);
+//        mSecondPvNumberPicker.setOnScrollListener(this);
         mSecondPvNumberPicker.setMaxValue(60);
         mSecondPvNumberPicker.setMinValue(0);
         mSecondPvNumberPicker.setValue(49);
     }
 
-    @Override
-    public String format(int i) {
-        return null;
-    }
 
-    @Override
-    public void onScrollStateChange(NumberPicker numberPicker, int i) {
-
-    }
-
-    @Override
-    public void onValueChange(NumberPicker numberPicker, int i, int i1) {
-
-    }
 }

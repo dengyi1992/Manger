@@ -88,8 +88,8 @@ public class NewTask extends Activity {
         JSONObject jsonObject = new JSONObject();
 
         try {
-            jsonObject.put("interfacename",interfaceurl);
-            jsonObject.put("description",interfacetag);
+            jsonObject.put("interfaceurl",interfaceurl);
+            jsonObject.put("interfacetag",interfacetag);
             jsonObject.put("cycle",hour*60+minute);
             jsonObject.put("type",type);
             entity = new StringEntity(jsonObject.toString());
@@ -107,7 +107,6 @@ public class NewTask extends Activity {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                         super.onSuccess(statusCode, headers, response);
-                        System.out.println(statusCode+""+response);
                         try {
                             if (statusCode==200){
 
@@ -134,12 +133,12 @@ public class NewTask extends Activity {
 
         mHourPvNumberPicker.setMaxValue(24);
         mHourPvNumberPicker.setMinValue(0);
-        mHourPvNumberPicker.setValue(9);
+        mHourPvNumberPicker.setValue(0);
 
 
         mMinutePvNumberPicker.setMaxValue(60);
         mMinutePvNumberPicker.setMinValue(0);
-        mMinutePvNumberPicker.setValue(49);
+        mMinutePvNumberPicker.setValue(0);
 
 
     }

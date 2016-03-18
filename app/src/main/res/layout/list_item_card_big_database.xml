@@ -13,25 +13,29 @@
         android:layout_marginLeft="@dimen/cardMarginHorizontal"
         android:layout_marginRight="@dimen/cardMarginHorizontal"
         android:layout_marginTop="@dimen/cardMarginVertical"
-        app:cardCornerRadius="2dp"
-        app:cardElevation="2dp"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="10dp"
         app:cardPreventCornerOverlap="false"
         app:contentPadding="0dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_marginLeft="@dimen/activity_vertical_margin"
+            android:padding="@dimen/item_padding">
             <TextView
                 android:id="@+id/tv_table_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="@color/black"
                 android:layout_weight="1"
                 android:text="表名" />
             <TextView
                 android:id="@+id/tv_table_rows"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="@color/black"
                 android:layout_weight="1"
                 android:text="行数" />
 
@@ -39,6 +43,7 @@
                 android:id="@+id/tv_table_avg_length"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="@color/black"
                 android:layout_weight="1"
                 android:text="平均长度" />
 
@@ -46,6 +51,7 @@
                 android:id="@+id/tv_table_data_length"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="@color/black"
                 android:layout_weight="1"
                 android:text="数据长度" />
 
@@ -53,6 +59,7 @@
                 android:id="@+id/tv_table_auto_increment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="@color/black"
                 android:layout_weight="1"
                 android:text="自增长号" />
         </LinearLayout>

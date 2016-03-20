@@ -1,6 +1,7 @@
 package com.dy.manager.view;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.text.TextUtils;
@@ -38,6 +39,8 @@ import cz.msebera.android.httpclient.entity.StringEntity;
  */
 public class NewTask extends Activity {
 
+    private static final int TASKRESULTSUCCESS = 0;
+    private static final int TASKRESULTFAIL = 1;
     private TextView mTextViewTextView;
     private NumberPicker mHourPvNumberPicker;
     private TextView mHourTvTextView;
@@ -80,11 +83,11 @@ public class NewTask extends Activity {
 
 
     private void submitData() {
-        int hour = mHourPvNumberPicker.getValue();
-        int minute = mMinutePvNumberPicker.getValue();
-        String interfacetag = mIntefacetagEditText.getText().toString();
-        String interfaceurl = mIntefaceurlEditText.getText().toString();
-        String type = metTypeEditText.getText().toString();
+        final int hour = mHourPvNumberPicker.getValue();
+        final int minute = mMinutePvNumberPicker.getValue();
+        final String interfacetag = mIntefacetagEditText.getText().toString();
+        final String interfaceurl = mIntefaceurlEditText.getText().toString();
+        final String type = metTypeEditText.getText().toString();
         JSONObject jsonObject = new JSONObject();
 
         try {
@@ -102,7 +105,7 @@ public class NewTask extends Activity {
         AsyncHttpClient asyncHttpClient = new AsyncHttpClient();
         RequestParams params = new RequestParams();
         params.put("notes", "Test api support");
-        asyncHttpClient.post(getApplicationContext(), "http://192.168.199.127:3000/tasksetting", entity,
+        asyncHttpClient.post(getApplicationContext(), "http://120.27.41.245:3000/tasksetting", entity,
                 "application/json", new JsonHttpResponseHandler(){
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
@@ -111,6 +114,18 @@ public class NewTask extends Activity {
                             if (statusCode==200){
 
                                 Toast.makeText(NewTask.this,response.getString("content"),Toast.LENGTH_SHORT).show();
+                                if (response.getString("msg").indexOf("success")!=-1){
+                                    Intent intent = new Intent();
+                                    Bundle bundle = new Bundle();
+                                    bundle.putString("interfacetag",interfacetag);
+                                    bundle.putString("interfaceurl",interfaceurl);
+                                    bundle.putInt("cycle", hour*60+minute);
+                                    bundle.putString("type",type);
+                                    intent.putExtra("result",bundle);
+                                    setResult(TASKRESULTSUCCESS,intent);
+
+                                    finish();
+                                }
                             }else {
                                 Toast.makeText(NewTask.this,"服务器错误",Toast.LENGTH_SHORT).show();
                             }

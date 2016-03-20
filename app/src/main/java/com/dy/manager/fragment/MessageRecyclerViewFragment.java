@@ -99,7 +99,7 @@ public class MessageRecyclerViewFragment extends Fragment {
             message.setMessageBody("更新成功");
             message.setMessageCount(1);
             message.setTime(time);
-            mContentItems.add(message);
+            mContentItems.add(0,message);
             mAdapter.notifyDataSetChanged();
             System.out.println("fragment copy"+name);
         }

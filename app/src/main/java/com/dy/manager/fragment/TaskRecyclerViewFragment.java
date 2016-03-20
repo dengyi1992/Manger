@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.dy.manager.Adpter.TaskRecyclerViewAdapter;
+import com.dy.manager.Bean.TaskBean;
 import com.dy.manager.R;
 import com.dy.manager.view.NewTask;
 import com.github.clans.fab.FloatingActionButton;
@@ -29,14 +30,15 @@ public class TaskRecyclerViewFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
 
-    private static final int ITEM_COUNT = 100;
+    private static final int ITEM_COUNT = 0;
 
-    private List<Object> mContentItems = new ArrayList<>();
+    private List<TaskBean> mContentItems = new ArrayList<>();
 
     private FloatingActionButton mFab1FloatingActionButton;
     private FloatingActionButton mFab2FloatingActionButton;
     private FloatingActionButton mFab3FloatingActionButton;
     private FloatingActionMenu mMenu1FloatingActionMenu;
+    private final int TASKCODE=0;
 
     public static TaskRecyclerViewFragment newInstance() {
         return new TaskRecyclerViewFragment();
@@ -69,7 +71,7 @@ public class TaskRecyclerViewFragment extends Fragment {
 
         {
             for (int i = 0; i < ITEM_COUNT; ++i)
-                mContentItems.add(new Object());
+                mContentItems.add(new TaskBean());
             mAdapter.notifyDataSetChanged();
         }
 
@@ -79,8 +81,30 @@ public class TaskRecyclerViewFragment extends Fragment {
         mFab1FloatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getContext(), NewTask.class));
+                startActivityForResult(new Intent(getContext(), NewTask.class),TASKCODE);
             }
         });
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+       switch (resultCode){
+           case 0:
+               //如果成功就加入到mContentItems
+               Bundle result = data.getBundleExtra("result");
+               TaskBean taskBean = new TaskBean();
+               taskBean.setCycle(result.getInt("cycle"));
+               taskBean.setInterfaceTag(result.getString("interfacetag"));
+               taskBean.setInterfaceUrl(result.getString("interfaceurl"));
+               taskBean.setRepeat(true);
+               taskBean.setType(result.getString("type"));
+               mContentItems.add(0,taskBean);
+               mAdapter.notifyDataSetChanged();
+               break;
+           case 1:
+               break;
+           default:break;
+       }
+
     }
 }

@@ -20,7 +20,7 @@
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         app:menu_backgroundColor="#ccffffff"
-        app:menu_fab_label="Menu label"
+        app:menu_fab_label="任务菜单"
         app:menu_labels_ellipsize="end"
         app:menu_labels_singleLine="true">
 
@@ -28,25 +28,19 @@
             android:id="@+id/fab1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@android:drawable/ic_menu_edit"
-            app:fab_label="Menu item 1"
-            app:fab_size="mini" />
+            android:src="@mipmap/newadd"
+            app:fab_label="新建任务"
+            app:fab_size="normal" />
 
         <com.github.clans.fab.FloatingActionButton
             android:id="@+id/fab2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@android:drawable/ic_menu_edit"
-            app:fab_label="Menu item 2"
-            app:fab_size="mini" />
+            android:src="@mipmap/delete"
+            app:fab_label="删除"
+            app:fab_size="normal" />
 
-        <com.github.clans.fab.FloatingActionButton
-            android:id="@+id/fab3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@android:drawable/ic_menu_edit"
-            app:fab_label="item"
-            app:fab_size="mini" />
+
 
     </com.github.clans.fab.FloatingActionMenu>
 </FrameLayout>

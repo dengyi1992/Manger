@@ -2,13 +2,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@android:color/holo_blue_bright">
     <RelativeLayout
         android:layout_margin="@dimen/activity_horizontal_margin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:background="#ffffff" >
+        android:background="@android:color/transparent" >
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -20,6 +21,7 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
         <NumberPicker
+            android:layout_marginLeft="40dp"
             android:id="@+id/hour_pv"
             android:layout_width="80dp"
             android:layout_height="160dp"
@@ -38,7 +40,8 @@
             android:textColor="#ffaa33"
             android:textSize="26sp"
             android:textStyle="bold"
-            style="@style/AppTheme" />
+            style="@style/AppTheme"
+            android:autoText="false" />
         <NumberPicker
             android:id="@+id/minute_pv"
             android:layout_toRightOf="@id/hour_tv"

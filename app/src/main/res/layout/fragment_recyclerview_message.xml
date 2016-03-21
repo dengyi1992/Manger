@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="match_parent">
+
     <android.support.v7.widget.RecyclerView
 
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        />
+        android:layout_height="match_parent" />
 
     <com.github.clans.fab.FloatingActionMenu
         android:id="@+id/menu1"
@@ -16,41 +16,41 @@
         android:layout_height="match_parent"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:paddingRight="10dp"
         android:paddingBottom="10dp"
         android:paddingLeft="10dp"
-        app:menu_colorNormal="@color/blue"
-        app:menu_labels_ellipsize="end"
-        app:menu_labels_singleLine="true"
+        android:paddingRight="10dp"
         app:menu_backgroundColor="#ccffffff"
-        app:menu_fab_label="Menu label">
+        app:menu_colorNormal="@color/blue"
+        app:menu_fab_label="消息菜单"
+        app:menu_labels_ellipsize="end"
+        app:menu_labels_singleLine="true">
 
-        <com.github.clans.fab.FloatingActionButton
-            android:id="@+id/fab1"
-            app:fab_colorNormal="@color/blue"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@android:drawable/ic_menu_edit"
-            app:fab_size="mini"
-            app:fab_label="Menu item 1" />
 
         <com.github.clans.fab.FloatingActionButton
             android:id="@+id/fab2"
-            app:fab_colorNormal="@color/blue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@android:drawable/ic_menu_edit"
-            app:fab_size="mini"
-            app:fab_label="Menu item 2" />
+            android:src="@mipmap/selectall"
+            app:fab_colorNormal="@color/blue"
+            app:fab_label="全选"
+            app:fab_size="normal" />
 
         <com.github.clans.fab.FloatingActionButton
             android:id="@+id/fab3"
-            app:fab_colorNormal="@color/blue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@android:drawable/ic_menu_edit"
-            app:fab_size="mini"
-            app:fab_label="item" />
+            android:src="@mipmap/delete"
+            app:fab_colorNormal="@color/blue"
+            app:fab_label="删除"
+            app:fab_size="normal" />
 
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/fab1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/setting"
+            app:fab_colorNormal="@color/blue"
+            app:fab_label="设置"
+            app:fab_size="normal" />
     </com.github.clans.fab.FloatingActionMenu>
 </FrameLayout>

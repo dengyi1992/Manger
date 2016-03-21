@@ -34,5 +34,6 @@ dependencies {
     compile 'com.github.clans:fab:1.6.2'
     compile files('libs/xutils-3.3.22-sources.jar')
     compile 'com.loopj.android:android-async-http:1.4.9'
+    compile 'me.drakeet.materialdialog:library:1.3.0'
 }
 

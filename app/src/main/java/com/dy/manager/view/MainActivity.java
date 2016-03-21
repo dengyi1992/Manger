@@ -23,15 +23,16 @@ import com.dy.manager.fragment.TaskRecyclerViewFragment;
 import com.github.florent37.materialviewpager.MaterialViewPager;
 import com.github.florent37.materialviewpager.header.HeaderDesign;
 
+import me.drakeet.materialdialog.MaterialDialog;
 
 
 public class MainActivity extends AppCompatActivity {
 
     private MaterialViewPager mViewPager;
 
-    private DrawerLayout mDrawer;
-    private ActionBarDrawerToggle mDrawerToggle;
-    private Toolbar toolbar;
+//    private DrawerLayout mDrawer;
+//    private ActionBarDrawerToggle mDrawerToggle;
+//    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,28 +41,26 @@ public class MainActivity extends AppCompatActivity {
         startService(new Intent(this, MessageService.class));
 
 
-        setTitle("");
+//        setTitle("");
 
         mViewPager = (MaterialViewPager) findViewById(R.id.materialViewPager);
 
-        toolbar = mViewPager.getToolbar();
-        mDrawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+//        toolbar = mViewPager.getToolbar();
+//
+//        if (toolbar != null) {
+//            setSupportActionBar(toolbar);
+//
+//            final ActionBar actionBar = getSupportActionBar();
+//            if (actionBar != null) {
+//                actionBar.setDisplayHomeAsUpEnabled(true);
+//                actionBar.setDisplayShowHomeEnabled(true);
+//                actionBar.setDisplayShowTitleEnabled(true);
+//                actionBar.setDisplayUseLogoEnabled(false);
+//                actionBar.setHomeButtonEnabled(true);
+//            }
+//        }
 
-        if (toolbar != null) {
-            setSupportActionBar(toolbar);
 
-            final ActionBar actionBar = getSupportActionBar();
-            if (actionBar != null) {
-                actionBar.setDisplayHomeAsUpEnabled(true);
-                actionBar.setDisplayShowHomeEnabled(true);
-                actionBar.setDisplayShowTitleEnabled(true);
-                actionBar.setDisplayUseLogoEnabled(false);
-                actionBar.setHomeButtonEnabled(true);
-            }
-        }
-
-        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawer, 0, 0);
-        mDrawer.setDrawerListener(mDrawerToggle);
 
         mViewPager.getViewPager().setAdapter(new FragmentStatePagerAdapter(getSupportFragmentManager()) {
 
@@ -139,7 +138,24 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     mViewPager.notifyHeaderChanged();
-                    Toast.makeText(getApplicationContext(), "Yes, the title is clickable", Toast.LENGTH_SHORT).show();
+                    final MaterialDialog mMaterialDialog = new MaterialDialog(MainActivity.this);
+                    mMaterialDialog.setTitle("关于三人行后台管理")
+                            .setMessage("用于三人行（我就是热点）服务器端管理，" +
+                                    "通过该app可以了解数据库的各表的数据信息量，" +
+                                    "可以给服务器设置定时任务，" +
+                                    "并收服务器完成定时任务的反馈，" +
+                                    "还可以查看客户端app的用户数据，" +
+                                    "以及将有想推送的内容推送给指定的用户群体。")
+                            .setBackgroundResource(R.mipmap.back)
+                            .setPositiveButton("我知道啦！", new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                   mMaterialDialog.dismiss();
+                                }
+                            });
+
+
+                    mMaterialDialog.show();
                 }
             });
     }
@@ -147,12 +163,12 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
-        mDrawerToggle.syncState();
+//        mDrawerToggle.syncState();
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        return mDrawerToggle.onOptionsItemSelected(item) ||
-                super.onOptionsItemSelected(item);
-    }
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        return mDrawerToggle.onOptionsItemSelected(item) ||
+//                super.onOptionsItemSelected(item);
+//    }
 }

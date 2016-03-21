@@ -91,15 +91,21 @@ public class TaskRecyclerViewFragment extends Fragment {
        switch (resultCode){
            case 0:
                //如果成功就加入到mContentItems
-               Bundle result = data.getBundleExtra("result");
-               TaskBean taskBean = new TaskBean();
-               taskBean.setCycle(result.getInt("cycle"));
-               taskBean.setInterfaceTag(result.getString("interfacetag"));
-               taskBean.setInterfaceUrl(result.getString("interfaceurl"));
-               taskBean.setRepeat(true);
-               taskBean.setType(result.getString("type"));
-               mContentItems.add(0,taskBean);
-               mAdapter.notifyDataSetChanged();
+
+               if (data!=null){
+                   Bundle result = data.getBundleExtra("result");
+                   TaskBean taskBean = new TaskBean();
+                   taskBean.setCycle(result.getInt("cycle"));
+                   taskBean.setInterfaceTag(result.getString("interfacetag"));
+                   taskBean.setInterfaceUrl(result.getString("interfaceurl"));
+                   taskBean.setRepeat(true);
+                   taskBean.setType(result.getString("type"));
+                   mContentItems.add(0,taskBean);
+                   mAdapter.notifyDataSetChanged();
+               }else {
+                   return;
+               }
+
                break;
            case 1:
                break;

@@ -11,7 +11,7 @@
         android:layout_height="match_parent" />
 
     <com.github.clans.fab.FloatingActionMenu
-        android:id="@+id/menu1"
+        android:id="@+id/menu_message"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentBottom="true"
@@ -26,26 +26,19 @@
         app:menu_labels_singleLine="true">
 
 
-        <com.github.clans.fab.FloatingActionButton
-            android:id="@+id/fab2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/selectall"
-            app:fab_colorNormal="@color/blue"
-            app:fab_label="全选"
-            app:fab_size="normal" />
+
 
         <com.github.clans.fab.FloatingActionButton
-            android:id="@+id/fab3"
+            android:id="@+id/clear_all"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@mipmap/delete"
             app:fab_colorNormal="@color/blue"
-            app:fab_label="删除"
+            app:fab_label="清空所有"
             app:fab_size="normal" />
 
         <com.github.clans.fab.FloatingActionButton
-            android:id="@+id/fab1"
+            android:id="@+id/message_setting"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@mipmap/setting"

@@ -11,13 +11,16 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.dy.manager.Adpter.TaskRecyclerViewAdapter;
+import com.dy.manager.Bean.Task;
 import com.dy.manager.Bean.TaskBean;
 import com.dy.manager.R;
+import com.dy.manager.Utils.HttpUtils;
 import com.dy.manager.view.NewTask;
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
 import com.github.florent37.materialviewpager.MaterialViewPagerHelper;
 import com.github.florent37.materialviewpager.adapter.RecyclerViewMaterialAdapter;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +30,7 @@ import java.util.List;
  */
 public class TaskRecyclerViewFragment extends Fragment {
 
+    private static final String TASKSETTINGURL = "http://10.170.13.58:3000/admin/tasksetting_info";
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
 
@@ -50,9 +54,10 @@ public class TaskRecyclerViewFragment extends Fragment {
 
 
 
-
         return view;
     }
+
+
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
@@ -84,6 +89,8 @@ public class TaskRecyclerViewFragment extends Fragment {
                 startActivityForResult(new Intent(getContext(), NewTask.class),TASKCODE);
             }
         });
+        getNetData();
+
     }
 
     @Override
@@ -112,5 +119,33 @@ public class TaskRecyclerViewFragment extends Fragment {
            default:break;
        }
 
+    }
+    private void getNetData() {
+        HttpUtils.doGetAsyn(TASKSETTINGURL, new HttpUtils.CallBack() {
+            @Override
+            public void onRequestComplete(String result) {
+                System.out.println(result);
+                Gson gson = new Gson();
+                Task task = gson.fromJson(result, Task.class);
+                List<Task.ContentEntity> content = task.getContent();
+                mContentItems.clear();
+                for (int i = 0; i < content.size(); i++) {
+                    Task.ContentEntity contentEntity = content.get(i);
+                    String ctime = contentEntity.getCtime();
+                    String interfaceurl = contentEntity.getInterfaceurl();
+                    String interfacetag = contentEntity.getInterfacetag();
+                    int ifopen = contentEntity.getIfopen();
+                    String type = contentEntity.getType();
+                    int cycle = contentEntity.getCycle();
+                    TaskBean taskBean = new TaskBean();
+                    taskBean.setCycle(cycle);
+                    taskBean.setInterfaceTag(interfacetag);
+                    taskBean.setInterfaceUrl(interfaceurl);
+                    taskBean.setRepeat(true);
+                    taskBean.setType(type);
+                    mContentItems.add(0,taskBean);
+                }
+            }
+        });
     }
 }

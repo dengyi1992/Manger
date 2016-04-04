@@ -92,15 +92,6 @@ public class MessageRecyclerViewFragment extends Fragment {
     private class UpdateUIBroadcastReceiver extends BroadcastReceiver{
         @Override
         public void onReceive(Context context, Intent intent) {
-//            String name = intent.getStringExtra("name");
-//            String time = intent.getStringExtra("time");
-//            Message message = new Message();
-//            message.setMessageTitle(name);
-//            message.setMessageBody("更新成功");
-//            message.setMessageCount(1);
-//            message.setTime(time);
-//            mContentItems.add(0,message);
-//            mAdapter.notifyDataSetChanged();
               selectData();
 
         }

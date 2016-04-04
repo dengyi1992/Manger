@@ -1,14 +1,14 @@
 package com.dy.manager.Services;
 
 import android.app.Service;
-import android.content.BroadcastReceiver;
-import android.content.Context;
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.support.v4.content.LocalBroadcastManager;
-import android.widget.Toast;
 
+import com.dy.manager.Dao.MessageDBHelper;
 import com.dy.manager.fragment.MessageRecyclerViewFragment;
 import com.github.nkzawa.emitter.Emitter;
 import com.github.nkzawa.socketio.client.IO;
@@ -79,6 +79,22 @@ public class MessageService extends Service {
                 intent.putExtra("name",name);
                 intent.putExtra("time",time);
                 sendBroadcast(intent);
+                MessageDBHelper messagedb = new MessageDBHelper(MessageService.this, "messagedb", null, 1);
+                SQLiteDatabase writableDatabase = messagedb.getWritableDatabase();
+                ContentValues contentValues = new ContentValues();
+                /**
+                 *   + "id integer primary key autoincrement, "
+                 + "title text, "
+                 + "body text, "
+                 + "count integer, "
+                 + "time text)";
+                 */
+                contentValues.put("title",name);
+                contentValues.put("body","更新成功");
+                contentValues.put("count",1);
+                contentValues.put("time",time);
+                writableDatabase.insert("Message",null,contentValues);
+                messagedb.close();
 //                System.out.println("##更新完的接口##"+iname+"##更新完成时间##"+time);
                 //任务完成，将所发任务的消息加入数据列表，并显示，可以加通知栏显示
                 //更新消息列表有难度，并加入已读与否的标记

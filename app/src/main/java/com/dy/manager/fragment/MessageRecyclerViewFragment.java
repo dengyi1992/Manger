@@ -4,6 +4,8 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -15,6 +17,7 @@ import android.view.ViewGroup;
 
 import com.dy.manager.Adpter.MessageRecyclerViewAdapter;
 import com.dy.manager.Bean.Message;
+import com.dy.manager.Dao.MessageDBHelper;
 import com.dy.manager.R;
 import com.github.florent37.materialviewpager.MaterialViewPagerHelper;
 import com.github.florent37.materialviewpager.adapter.RecyclerViewMaterialAdapter;
@@ -79,11 +82,8 @@ public class MessageRecyclerViewFragment extends Fragment {
         mAdapter = new RecyclerViewMaterialAdapter(new MessageRecyclerViewAdapter(mContentItems));
         mRecyclerView.setAdapter(mAdapter);
 
-        {
-            for (int i = 0; i < ITEM_COUNT; ++i)
-                mContentItems.add(new Message());
-            mAdapter.notifyDataSetChanged();
-        }
+        selectData();
+
 
         MaterialViewPagerHelper.registerRecyclerView(getActivity(), mRecyclerView, null);
     }
@@ -92,17 +92,49 @@ public class MessageRecyclerViewFragment extends Fragment {
     private class UpdateUIBroadcastReceiver extends BroadcastReceiver{
         @Override
         public void onReceive(Context context, Intent intent) {
-            String name = intent.getStringExtra("name");
-            String time = intent.getStringExtra("time");
-            Message message = new Message();
-            message.setMessageTitle(name);
-            message.setMessageBody("更新成功");
-            message.setMessageCount(1);
-            message.setTime(time);
-            mContentItems.add(0,message);
-            mAdapter.notifyDataSetChanged();
-            System.out.println("fragment copy"+name);
+//            String name = intent.getStringExtra("name");
+//            String time = intent.getStringExtra("time");
+//            Message message = new Message();
+//            message.setMessageTitle(name);
+//            message.setMessageBody("更新成功");
+//            message.setMessageCount(1);
+//            message.setTime(time);
+//            mContentItems.add(0,message);
+//            mAdapter.notifyDataSetChanged();
+              selectData();
+
         }
+    }
+
+    private void selectData() {
+
+        MessageDBHelper messageDBHelper = new MessageDBHelper(getContext(), "messagedb", null, 1);
+        SQLiteDatabase readableDatabase = messageDBHelper.getReadableDatabase();
+        Cursor cursor = readableDatabase.rawQuery("select * from Message", null);
+        /**
+         *   + "id integer primary key autoincrement, "
+         + "title text, "
+         + "body text, "
+         + "count integer, "
+         + "time text)";
+         */
+        mContentItems.clear();
+        while (cursor.moveToNext()){
+            int id = cursor.getInt(cursor.getColumnIndex("id"));
+            String title = cursor.getString(cursor.getColumnIndex("title"));
+            String body = cursor.getString(cursor.getColumnIndex("body"));
+            int count = cursor.getInt(cursor.getColumnIndex("count"));
+            String time = cursor.getString(cursor.getColumnIndex("time"));
+            Message message = new Message();
+            message.setTime(time);
+            message.setMessageCount(count);
+            message.setMessageBody(body);
+            message.setMessageTitle(title);
+            mContentItems.add(message);
+
+        }
+        mAdapter.notifyDataSetChanged();
+        readableDatabase.close();
     }
 
     @Override
@@ -110,4 +142,5 @@ public class MessageRecyclerViewFragment extends Fragment {
         super.onDestroy();
         getContext().unregisterReceiver(broadcastReceiver);
     }
+
 }

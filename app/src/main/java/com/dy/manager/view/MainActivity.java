@@ -4,14 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentStatePagerAdapter;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Toast;
 
 import com.dy.manager.R;
 import com.dy.manager.Services.MessageService;
@@ -171,4 +166,9 @@ public class MainActivity extends AppCompatActivity {
 //        return mDrawerToggle.onOptionsItemSelected(item) ||
 //                super.onOptionsItemSelected(item);
 //    }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        return super.dispatchTouchEvent(ev);
+    }
 }

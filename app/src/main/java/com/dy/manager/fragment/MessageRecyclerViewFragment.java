@@ -34,12 +34,12 @@ import java.util.List;
  */
 public class MessageRecyclerViewFragment extends Fragment implements View.OnClickListener {
     public static final String ACTION_UPDATEUI = "action.updateMessage";
-    private RecyclerView mRecyclerView;
+    public static RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private UpdateUIBroadcastReceiver broadcastReceiver;
     private FloatingActionButton mClearAllFloatingActionButton;
     private FloatingActionButton mMessageSettingFloatingActionButton;
-    private MessageDBHelper messageDBHelper;
+    public static MessageDBHelper messageDBHelper;
     private FloatingActionMenu floatingActionMenu;
 
 
@@ -143,7 +143,7 @@ public class MessageRecyclerViewFragment extends Fragment implements View.OnClic
         }
     }
 
-    private void selectData() {
+    public void selectData() {
 
         messageDBHelper = new MessageDBHelper(getContext(), "messagedb", null, 1);
         SQLiteDatabase readableDatabase = messageDBHelper.getReadableDatabase();
@@ -167,7 +167,8 @@ public class MessageRecyclerViewFragment extends Fragment implements View.OnClic
             message.setMessageCount(count);
             message.setMessageBody(body);
             message.setMessageTitle(title);
-            mContentItems.add(message);
+            message.setId(id);
+            mContentItems.add(0,message);
 
         }
 

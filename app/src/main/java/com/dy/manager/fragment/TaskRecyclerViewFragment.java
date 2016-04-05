@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -121,31 +122,38 @@ public class TaskRecyclerViewFragment extends Fragment {
 
     }
     private void getNetData() {
-        HttpUtils.doGetAsyn(TASKSETTINGURL, new HttpUtils.CallBack() {
-            @Override
-            public void onRequestComplete(String result) {
-                System.out.println(result);
-                Gson gson = new Gson();
-                Task task = gson.fromJson(result, Task.class);
-                List<Task.ContentEntity> content = task.getContent();
-                mContentItems.clear();
-                for (int i = 0; i < content.size(); i++) {
-                    Task.ContentEntity contentEntity = content.get(i);
-                    String ctime = contentEntity.getCtime();
-                    String interfaceurl = contentEntity.getInterfaceurl();
-                    String interfacetag = contentEntity.getInterfacetag();
-                    int ifopen = contentEntity.getIfopen();
-                    String type = contentEntity.getType();
-                    int cycle = contentEntity.getCycle();
-                    TaskBean taskBean = new TaskBean();
-                    taskBean.setCycle(cycle);
-                    taskBean.setInterfaceTag(interfacetag);
-                    taskBean.setInterfaceUrl(interfaceurl);
-                    taskBean.setRepeat(true);
-                    taskBean.setType(type);
-                    mContentItems.add(0,taskBean);
+        try {
+            HttpUtils.doGetAsyn(TASKSETTINGURL, new HttpUtils.CallBack() {
+                @Override
+                public void onRequestComplete(String result) {
+                    if (result!=null){
+                        Gson gson = new Gson();
+                        Task task = gson.fromJson(result, Task.class);
+                        List<Task.ContentEntity> content = task.getContent();
+                        mContentItems.clear();
+                        for (int i = 0; i < content.size(); i++) {
+                            Task.ContentEntity contentEntity = content.get(i);
+                            String ctime = contentEntity.getCtime();
+                            String interfaceurl = contentEntity.getInterfaceurl();
+                            String interfacetag = contentEntity.getInterfacetag();
+                            int ifopen = contentEntity.getIfopen();
+                            String type = contentEntity.getType();
+                            int cycle = contentEntity.getCycle();
+                            TaskBean taskBean = new TaskBean();
+                            taskBean.setCycle(cycle);
+                            taskBean.setInterfaceTag(interfacetag);
+                            taskBean.setInterfaceUrl(interfaceurl);
+                            taskBean.setRepeat(true);
+                            taskBean.setType(type);
+                            mContentItems.add(0,taskBean);
+                        }
+                    }
+
                 }
-            }
-        });
+            });
+        }catch (Exception e){
+            Log.d("network",e.toString());
+        }
+
     }
 }

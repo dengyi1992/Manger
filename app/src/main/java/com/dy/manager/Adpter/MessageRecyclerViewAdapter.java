@@ -2,7 +2,9 @@ package com.dy.manager.Adpter;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +12,7 @@ import android.widget.TextView;
 
 import com.dy.manager.Bean.Message;
 import com.dy.manager.R;
+import com.dy.manager.fragment.MessageRecyclerViewFragment;
 
 import java.util.List;
 
@@ -68,13 +71,17 @@ public class MessageRecyclerViewAdapter extends RecyclerView.Adapter<MessageRecy
             view.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View view) {
-                    System.out.println(contents.get(getAdapterPosition() - 1).getMessageTitle());
+                    System.out.println(contents.get(getAdapterPosition() - 1).getTime());
                     new AlertDialog.Builder(view.getContext()).setTitle("温馨提示")
                             .setMessage("是否删除 " + contents.get(getAdapterPosition() - 1).getMessageTitle() + "?")
                             .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
-
+                                    Message message = contents.get(getAdapterPosition() - 1);
+                                    int id = message.getId();
+                                    findByIdAndDelete(id);
+                                    contents.remove(getAdapterPosition() - 1);
+                                    notifyDataSetChanged();
                                 }
                             })
                             .setNegativeButton("取消", new DialogInterface.OnClickListener() {
@@ -91,4 +98,16 @@ public class MessageRecyclerViewAdapter extends RecyclerView.Adapter<MessageRecy
         }
 
     }
+
+    private void findByIdAndDelete(int id) {
+        SQLiteDatabase writableDatabase = MessageRecyclerViewFragment.messageDBHelper.getWritableDatabase();
+        String DELETESQL = "DELETE FROM MESSAGE WHERE id = '" + id + "'";
+        try {
+            writableDatabase.execSQL(DELETESQL);
+        } catch (Exception e) {
+            Log.d("database exception ", e.toString());
+        }
+        writableDatabase.close();
+    }
+
 }

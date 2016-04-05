@@ -1,7 +1,5 @@
 package com.dy.manager.Bean;
 
-import java.util.List;
-
 /**
  * Created by deng on 16-3-12.
  */
@@ -10,6 +8,15 @@ public class Message {
     public String messageBody;
     public int messageCount;
     public String time;
+    public int id;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getMessageTitle() {
         return messageTitle;
